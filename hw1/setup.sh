@@ -303,7 +303,7 @@ start() {
             --cert-dir=/var/lib/kubelet/pki \
             --tls-cert-file=/var/lib/kubelet/pki/kubelet.crt \
             --tls-private-key-file=/var/lib/kubelet/pki/kubelet.key \
-            --hostname-override=ip-172-31-45-253.eu-central-1.compute.internal \ #$(hostname)
+            --hostname-override=$(hostname)
             --pod-infra-container-image=registry.k8s.io/pause:3.10 \
             --node-ip=$HOST_IP \
             --cloud-provider=external \
