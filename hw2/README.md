@@ -36,10 +36,10 @@ sudo ./ec2-metadata-mock-linux-amd64 --port=80
 * Gerenate temporary AWS credentials for CCM and export to root env
 ```
 export AWS_REGION=eu-central-1
-export AWS_ACCOUNT_ID=819340487893
-export AWS_ACCESS_KEY_ID=ASIA35RD7VTKWEXXOQ2Y
-export AWS_SECRET_ACCESS_KEY=JYzb91GdWm5H1ahXNCODzVSvppw8UOJuo6+fi9vc
-export AWS_SESSION_TOKEN=IQoJb3JpZ2luX2VjENz//////////wEaDGV1LWNlbnRyYWwtMSJHMEUCIQDFPvgfLqV7k3q9nEVAzrfZuk6mzY3zFO/6D1tlGzF/tAIgUifmwfiI/Qj1FA5YJpQReXi98FSC1TWBjbv5W3aUReUq6wEIdRAAGgw4MTkzNDA0ODc4OTMiDE0VfwOetu/HwyWwaCrIAc9k7DwkyRlKjCzzRoXcb/VnGBehpRuqLfy7oFugO/J6DdWlkrEccFYzA8BT1gmsYCaRVb1KbhaAKIR3fwNwLFgHDfaAD5nuso5lQ0p8kFbuvYDiqjIjlZJkKBA0sF+7/aBwUvFquKLyTOfgkenVh49JIe24ycZc28VPVMEnZhX8kSyhgfC9fW4FkqAwgxcf1+VSCGKPWhBnbZiLV72At4a3Il/LzeVn5Jd4OB4KfbheJPJq36M4suPjN08WUTSu9moGc84xOobHMJiriccGOpgBpXwkMgfWV9geGHxH2ZD0yPwDxnnLhNWiDyEvLsUGvfbDmpUplKvoV6f/tngbGspZpQIRdCMtiEU4lZdBxJHUAj/SBTlaTgVyOC6FONJcM54vrPs6B3SX0Im1yD1JChphAiTINW6fZmBdYW/Reg/hbSVoumy2xwDGxQxbdLRPWQ4zROEvWhwDfFCUpvlX+Ai/Uhb86jPKPWQ=
+export AWS_ACCOUNT_ID=
+export AWS_ACCESS_KEY_ID=
+export AWS_SECRET_ACCESS_KEY=
+export AWS_SESSION_TOKEN=
 ```
 * Create a cloud config for CCM
 ```
