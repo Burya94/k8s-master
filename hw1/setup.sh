@@ -173,8 +173,6 @@ EOF
 apiVersion: kubelet.config.k8s.io/v1beta1
 kind: KubeletConfiguration
 authentication:
-  anonymous:
-    enabled: true
   webhook:
     enabled: true
   x509:
@@ -266,7 +264,8 @@ start() {
             --cloud-provider=external \
             --service-account-issuer=https://kubernetes.default.svc.cluster.local \
             --service-account-key-file=/tmp/sa.pub \
-            --service-account-signing-key-file=/tmp/sa.key &
+            --service-account-signing-key-file=/tmp/sa.key  \
+            --enable-bootstrap-token-auth=true &
     fi
 
     if ! is_running "containerd"; then
@@ -294,23 +293,23 @@ start() {
     sudo kubebuilder/bin/kubectl create configmap kube-root-ca.crt --from-file=ca.crt=/tmp/ca.crt -n default 2>/dev/null || true
 
 
-    if ! is_running "kubelet"; then
-        echo "Starting kubelet..."
-        sudo PATH=$PATH:/opt/cni/bin:/usr/sbin kubebuilder/bin/kubelet \
-            --kubeconfig=/var/lib/kubelet/kubeconfig \
-            --config=/var/lib/kubelet/config.yaml \
-            --root-dir=/var/lib/kubelet \
-            --cert-dir=/var/lib/kubelet/pki \
-            --tls-cert-file=/var/lib/kubelet/pki/kubelet.crt \
-            --tls-private-key-file=/var/lib/kubelet/pki/kubelet.key \
-            --hostname-override=$(hostname) \
-            --pod-infra-container-image=registry.k8s.io/pause:3.10 \
-            --node-ip=$HOST_IP \
-            --cloud-provider=external \
-            --cgroup-driver=cgroupfs \
-            --max-pods=4  \
-            --v=1 &
-    fi
+    # if ! is_running "kubelet"; then
+    #     echo "Starting kubelet..."
+    #     sudo PATH=$PATH:/opt/cni/bin:/usr/sbin kubebuilder/bin/kubelet \
+    #         --kubeconfig=/var/lib/kubelet/kubeconfig \
+    #         --config=/var/lib/kubelet/config.yaml \
+    #         --root-dir=/var/lib/kubelet \
+    #         --cert-dir=/var/lib/kubelet/pki \
+    #         --tls-cert-file=/var/lib/kubelet/pki/kubelet.crt \
+    #         --tls-private-key-file=/var/lib/kubelet/pki/kubelet.key \
+    #         --hostname-override=$(hostname) \
+    #         --pod-infra-container-image=registry.k8s.io/pause:3.10 \
+    #         --node-ip=$HOST_IP \
+    #         --cloud-provider=external \
+    #         --cgroup-driver=cgroupfs \
+    #         --max-pods=4  \
+    #         --v=1 &
+    # fi
 
     # Label the node so static pods with nodeSelector can be scheduled
     NODE_NAME=$(hostname)
