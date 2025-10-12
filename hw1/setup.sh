@@ -162,6 +162,9 @@ version = 3
 
 [plugins.'io.containerd.cri.v1.runtime'.containerd.runtimes.runc.options]
   SystemdCgroup = false
+
+[plugins."io.containerd.grpc.v1.cri".containerd]
+  snapshotter = "overlayfs"
 EOF
 
     # Ensure containerd data directory exists with correct permissions

@@ -1,0 +1,6 @@
+apiVersion: apps.newresource.com/v1alpha1
+kind: NewResource
+metadata:
+  name: example-resource
+spec:
+  foo: "hello world"

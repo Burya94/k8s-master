@@ -234,7 +234,7 @@ go build -o bin/manager main.go
 kubectl apply -f config/crd/bases/apps.newresource.com_newresources.yaml
 
 # Run the controller
-./bin/manager
+KUBERNETES_SERVICE_HOST=$(hostname -I | awk '{print $1}') KUBERNETES_SERVICE_PORT=6443 sudo ./bin/manager -kubeconfig /root/.kube/config
 ```
 
 ### Step 6: Test the Controller
@@ -260,9 +260,24 @@ kubectl get newresource example-resource -o yaml
 
 You should see `status.ready: true` in the output.
 
+Get metrics from the controller:
+
+```
+curl http://127.0.0.1:8080/metrics
+```
+
 ## Development
 
 ### Running Tests
+
+Download setup-env test from https://github.com/kubernetes-sigs/controller-runtime and move it into kubebuilder folder.
+
+```
+wget https://github.com/kubernetes-sigs/controller-runtime/releases/download/v0.22.3/setup-envtest-linux-amd64
+mv setup-envtest-linux-amd64 ../kubebuilder/bin/setup-envtest
+```
+
+Run test
 
 ```bash
 KUBEBUILDER_ASSETS="<PATH_TO_TESTENV_BIN>" go test ./...
