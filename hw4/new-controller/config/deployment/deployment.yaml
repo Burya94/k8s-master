@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: new-controller
+  labels:
+    app: new-controller
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: new-controller
+  template:
+    metadata:
+      labels:
+        app: new-controller
+    spec:
+      tolerations:
+      - key: "node.cloudprovider.kubernetes.io/uninitialized"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
+      containers:
+        - name: new-controller
+          image: new-controller:latest
+          ports:
+            - containerPort: 8080
+          resources: {}
+          env:
+            - name: ENV
+              value: "test"
+          imagePullPolicy: IfNotPresent
