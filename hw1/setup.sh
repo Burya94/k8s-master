@@ -173,8 +173,6 @@ EOF
 apiVersion: kubelet.config.k8s.io/v1beta1
 kind: KubeletConfiguration
 authentication:
-  anonymous:
-    enabled: true
   webhook:
     enabled: true
   x509:
@@ -265,7 +263,8 @@ start() {
             --v=0 \
             --service-account-issuer=https://kubernetes.default.svc.cluster.local \
             --service-account-key-file=/tmp/sa.pub \
-            --service-account-signing-key-file=/tmp/sa.key &
+            --service-account-signing-key-file=/tmp/sa.key  \
+            --enable-bootstrap-token-auth=true &
     fi
 
     if ! is_running "containerd"; then
