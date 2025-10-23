@@ -1,0 +1,14 @@
+apiVersion: fluxcd.controlplane.io/v1
+kind: ResourceSetInputProvider
+metadata:
+  name: app-pull-requests-flux
+  namespace: app-preview
+  annotations:
+    fluxcd.controlplane.io/reconcileEvery: "1m"
+spec:
+  type: GitHubPullRequest
+  url: https://github.com/Burya94/gops-desk
+  secretRef:
+    name: github-auth
+  defaultValues:
+    chart: "./helm"
