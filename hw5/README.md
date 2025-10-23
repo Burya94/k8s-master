@@ -84,6 +84,14 @@ kubectl create secret generic github-auth \
   --from-literal=password=${GITHUB_TOKEN} \
   -n app-preview
 ```
+# login to OCI registry with helm
+```
+echo $GITHUB_TOKEN | helm registry login --password-stdin ghcr.io -u Burya94
+```
+# create OCI release
+```
+kubectl apply -f release/ocirelease.yaml
+```
 
 ### 7. Verify Deployment
 
